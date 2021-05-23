@@ -1,3 +1,10 @@
+## Debug ngRock
+
+```
+ngrock http 8181
+```
+
+
 # Flutter Google Podcast Clone
 
 ![Generic badge](https://img.shields.io/badge/Flutter-1.14.7_pre.84-blue.svg)

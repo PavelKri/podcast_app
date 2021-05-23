@@ -1,15 +1,45 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_podcast/pages/player/presentations/views/player_podcast_view.dart';
+
+import 'package:get/get.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
+
 import 'package:flutter_podcast/bottom_bar.dart';
 import 'package:flutter_podcast/body.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'bottom_bar.dart';
+import 'lang/translation-service.dart';
+import 'routes/app_pages.dart';
+import 'shared/logger/logger_utils.dart';
 
-void main() {
+Future main() async {
+  await DotEnv.load();
+  await GetStorage.init();
   runApp(MyApp());
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.white, // status bar color
   ));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      enableLog: true,
+      logWriterCallback: Logger.write,
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+      locale: TranslationService.locale,
+      fallbackLocale: TranslationService.fallbackLocale,
+      translations: TranslationService(),
+    );
+  }
 }
 
 List<String> channels = [
@@ -25,12 +55,12 @@ List<String> channels = [
   'studio71.jpg'
 ];
 
-class MyApp extends StatefulWidget {
+class MyApp1 extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp1> {
   bool _searchbar = false;
   final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -122,7 +152,7 @@ class _MyAppState extends State<MyApp> {
           body: _searchbar
               ? Container(color: Colors.white)
               : Body(channels: channels),
-          bottomNavigationBar: BottomBar(),
+          bottomNavigationBar: SizedBox()// AudioPlayerBar(ppc PagePodcastController()),
         ),
       ),
     );

@@ -1,11 +1,9 @@
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_podcast/playing_sheet.dart';
 import 'package:marquee/marquee.dart';
 
 class BottomBar extends StatefulWidget {
-  static AudioCache player = AudioCache();
 
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -14,17 +12,17 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   // add it to your class as a static member
   // or as a local variable
-  final player = AudioCache();
+  // final player = AudioCache();
   bool playing = false;
   IconData _playButton = Icons.play_arrow;
 
   @override
   void initState() {
-    player.load('2020_01_gundem.mp3');
+    // player.load('2020_01_gundem.mp3');
     super.initState();
   }
 
-  AudioPlayer audioPlayer;
+
 
   void _playPause() {
     if (playing) {
@@ -40,10 +38,7 @@ class _BottomBarState extends State<BottomBar> {
       playing = !playing;
     });
     _playButton = Icons.pause;
-    if (audioPlayer != null)
-      audioPlayer.resume();
-    else
-      audioPlayer = await player.play('2020_01_gundem.mp3');
+
   }
 
   void _stop() async {
@@ -51,10 +46,7 @@ class _BottomBarState extends State<BottomBar> {
       playing = !playing;
     });
     _playButton = Icons.play_arrow;
-    if (audioPlayer != null)
-      audioPlayer.pause();
-    else
-      await audioPlayer.stop();
+
   }
 
   @override

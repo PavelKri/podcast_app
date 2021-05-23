@@ -27,7 +27,7 @@ class _ListingsState extends State<Listings> {
           ),
           SizedBox(height: 10.0),
           SizedBox(
-            height: 150.0,
+            height: 500.0,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
